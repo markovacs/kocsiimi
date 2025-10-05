@@ -107,7 +107,7 @@
 
     <div class="footer">"Állandóság illik a férfiúhoz; nem a cél, melyet magának kitűzött: hanem az, hogy tántoríthatatlanul hű maradt céljához, adja meg becsét." - Eötvös József</div>
 
-    <!-- Modal for submitting memories -->
+    <!-- MODAL (restyled form) -->
     <div class="modal" id="memoryModal">
       <div class="modal-content">
         <div class="modal-header">
@@ -126,34 +126,34 @@
         <form id="memoryForm" novalidate>
           <div id="storyFields">
             <div class="form-group">
-              <label for="name">Neved! *</label>
-              <input type="text" id="name" required placeholder="Add meg a Neved!">
+              <label for="name">Neved *</label>
+              <input type="text" id="name" required placeholder="Add meg a neved">
             </div>
             <div class="form-group">
-              <label for="connection">Kapcsolatod Imivel! *</label>
-              <input type="text" id="connection" required placeholder="Például edző, barát, családtag.">
+              <label for="connection">Kapcsolatod Imivel *</label>
+              <input type="text" id="connection" required placeholder="Például barát, edző, családtag">
             </div>
             <div class="form-group">
-              <label for="memory">Emléked! *</label>
-              <textarea id="memory" required placeholder="Oszdd meg velünk az emlékedet pár mondatban!"></textarea>
+              <label for="memory">Emléked *</label>
+              <textarea id="memory" required placeholder="Oszd meg velünk az emlékedet néhány mondatban"></textarea>
             </div>
           </div>
 
           <div id="pictureFields" style="display:none;">
             <div class="form-group">
-              <label for="pictureName">Neved! *</label>
-              <input type="text" id="pictureName" placeholder="Add meg a Neved!">
+              <label for="pictureName">Neved *</label>
+              <input type="text" id="pictureName" placeholder="Add meg a neved">
             </div>
             <div class="form-group">
-              <label for="pictureDesc">Rövid leírás a képről! *</label>
-              <textarea id="pictureDesc" placeholder="Írj egy rövid leírást a képről"></textarea>
+              <label for="pictureDesc">Rövid leírás a képről *</label>
+              <textarea id="pictureDesc" placeholder="Írj pár szót a képről"></textarea>
             </div>
             <div style="color:#ffcc00;font-style:italic;margin-bottom:15px;">
               Kérjük, a képet csatold az emailhez, amit a Küldés gomb megnyomása után nyitsz meg.
             </div>
           </div>
 
-          <button type="submit" class="submit-btn">Küldd el Nekünk emailben, hogy megoszthassuk a világgal!</button>
+          <button type="submit" class="submit-btn">Küldd el nekünk emailben</button>
         </form>
       </div>
     </div>
@@ -167,54 +167,72 @@
       const storyFields = document.getElementById('storyFields');
       const pictureFields = document.getElementById('pictureFields');
 
-      // Toggle fields based on selection
       memoryTypeSelect.addEventListener('change', () => {
-        if(memoryTypeSelect.value==='story'){
-          storyFields.style.display='block';
-          pictureFields.style.display='none';
+        if (memoryTypeSelect.value === 'story') {
+          storyFields.style.display = 'block';
+          pictureFields.style.display = 'none';
         } else {
-          storyFields.style.display='none';
-          pictureFields.style.display='block';
+          storyFields.style.display = 'none';
+          pictureFields.style.display = 'block';
         }
       });
 
-      // Open modal
-      openModalBtn.addEventListener('click', ()=>{ modal.classList.add('active'); setTimeout(()=>document.getElementById('name').focus(),80); });
+      openModalBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        setTimeout(() => document.getElementById('name').focus(), 80);
+      });
 
-      // Close modal
-      closeModalBtn.addEventListener('click', ()=>modal.classList.remove('active'));
-      modal.addEventListener('click', e=>{if(e.target===modal) modal.classList.remove('active');});
+      closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
+      modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
 
-      function escapeHtml(str){ if(!str) return ''; return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&amp;')
+                  .replace(/</g,'&lt;')
+                  .replace(/>/g,'&gt;')
+                  .replace(/"/g,'&quot;')
+                  .replace(/'/g,'&#39;');
+      }
 
-      memoryForm.addEventListener('submit', function(e){
+      memoryForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const today = new Date();
-        const dateString = today.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+        const dateString = today.toLocaleDateString('hu-HU');
         const email = "moderator@example.com";
-        const subject = encodeURIComponent("New Memory Submission");
+        const subject = encodeURIComponent("Új emlék beküldése");
 
-        if(memoryTypeSelect.value==='story'){
-          const nameRaw=document.getElementById('name').value.trim();
-          const connectionRaw=document.getElementById('connection').value.trim();
-          const memoryRaw=document.getElementById('memory').value.trim();
-          if(!nameRaw || !connectionRaw || !memoryRaw){ alert('Please fill in all required fields.'); return; }
-          const name=escapeHtml(nameRaw);
-          const connection=escapeHtml(connectionRaw);
-          const memory=escapeHtml(memoryRaw).replace(/\r?\n/g,'<br>');
-          const snippet=`<div class="memory-card"><div class="author">${name} – ${connection}</div><div class="text">${memory}</div><div class="date">Shared on ${dateString}</div></div>`;
-          const body=encodeURIComponent(snippet);
+        if (memoryTypeSelect.value === 'story') {
+          const nameRaw = document.getElementById('name').value.trim();
+          const connectionRaw = document.getElementById('connection').value.trim();
+          const memoryRaw = document.getElementById('memory').value.trim();
+
+          if (!nameRaw || !connectionRaw || !memoryRaw) {
+            alert('Kérjük, töltsd ki az összes kötelező mezőt!');
+            return;
+          }
+
+          const name = escapeHtml(nameRaw);
+          const connection = escapeHtml(connectionRaw);
+          const memory = escapeHtml(memoryRaw).replace(/\r?\n/g, '<br>');
+          const snippet = `<div class='memory-card'><div class='author'>${name} – ${connection}</div><div class='text'>${memory}</div><div class='date'>${dateString}</div></div>`;
+          const body = encodeURIComponent(snippet);
+
           memoryForm.reset();
           modal.classList.remove('active');
-          window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
+          window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
         } else {
-          const pictureName=document.getElementById('pictureName').value.trim();
-          const pictureDesc=document.getElementById('pictureDesc').value.trim();
-          if(!pictureName || !pictureDesc){ alert('Please fill in all required fields for picture.'); return; }
-          const bodyText=encodeURIComponent(`Neved: ${pictureName}\nKép leírása: ${pictureDesc}\nKérjük, csatold a képet az emailhez.`);
+          const pictureName = document.getElementById('pictureName').value.trim();
+          const pictureDesc = document.getElementById('pictureDesc').value.trim();
+          if (!pictureName || !pictureDesc) {
+            alert('Kérjük, töltsd ki az összes kötelező mezőt!');
+            return;
+          }
+
+          const bodyText = encodeURIComponent(`Neved: ${pictureName}\nKép leírása: ${pictureDesc}\nKérjük, csatold a képet az emailhez.`);
           memoryForm.reset();
           modal.classList.remove('active');
-          window.location.href=`mailto:${email}?subject=${subject}&body=${bodyText}`;
+          window.location.href = `mailto:${email}?subject=${subject}&body=${bodyText}`;
         }
       });
     </script>
