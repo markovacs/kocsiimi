@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+m<!DOCTYPE html>
 <html lang="hu">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kocsi Imre Emlékverseny</title>
+    <title>Kocsi Imre Emléktúra</title>
     <style>
       body {
         font-family: 'Georgia', serif;
@@ -43,7 +43,7 @@
       }
       .message {
         font-size: 1.8em;
-        color: #ffcc00;
+        color: #000000;
         font-style: italic;
         padding: 20px;
       }
@@ -67,12 +67,12 @@
       <h1>Kocsi Imre Emlékverseny</h1>
       <div class="nav">
         <a href="index.html">Főoldal</a>
-        <a href="race.html">Verseny</a>
+        <a href="race.html">Emléktúra</a>
       </div>
     </div>
 
     <div class="content">
-      <div class="message">Az oldal fejlesztés alatt áll...</div>
+      <div class="message">Az oldal fejlesztés alatt áll, kérünk térj vissza</div>
       <div id="countdown" class="countdown"></div>
     </div>
 
@@ -96,7 +96,7 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        countdownEl.innerHTML = `${days} nap ${hours} óra ${minutes} perc ${seconds} másodperc`;
+        countdownEl.innerHTML = `${days} nap ${hours} óra ${minutes} perc ${seconds} másodperc múlva!`;
       }
 
       updateCountdown();
