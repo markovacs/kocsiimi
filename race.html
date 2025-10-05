@@ -13,50 +13,23 @@
         flex-direction: column;
         min-height: 100vh;
         margin: 0;
-        padding-top: 120px; /* space for fixed header */
       }
-
       .header {
         background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
         color: white;
         text-align: center;
         padding: 60px 20px 40px;
         border-bottom: 2px solid #3a3a3a;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
+        position: relative;
       }
-
       .header h1 { font-weight: 300; letter-spacing: 2px; }
 
-      .nav {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        display: flex;
-        gap: 20px;
-      }
-
-      .nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1em;
-        font-weight: bold;
-        transition: color 0.3s ease;
-      }
-
+      .nav { position: absolute; top: 15px; right: 20px; display: flex; gap: 20px; }
+      .nav a { color: #fff; text-decoration: none; font-size: 1em; font-weight: bold; transition: color 0.3s ease; }
       .nav a:hover { color: #ffcc00; }
 
       @media (max-width: 768px) {
-        body { padding-top: 180px; }
-        .nav {
-          position: static;
-          justify-content: center;
-          margin-top: 20px;
-          flex-wrap: wrap;
-        }
+        .nav { position: static; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
         .nav a { margin: 5px 10px; font-size: 1.05em; }
       }
 
@@ -67,14 +40,12 @@
         justify-content: center;
         text-align: center;
       }
-
       .message {
         font-size: 1.8em;
         color: #ffcc00;
         font-style: italic;
         padding: 20px;
       }
-
       .footer {
         text-align: center;
         padding: 40px 20px;
@@ -84,7 +55,6 @@
       }
     </style>
   </head>
-
   <body>
     <div class="header">
       <h1>Kocsi Imre Emlékverseny</h1>
