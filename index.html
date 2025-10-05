@@ -6,88 +6,61 @@
     <title>Kocsi Imre emlékére</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body {
-        font-family: 'Georgia', serif;
-        background: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%);
-        color: #e0e0e0;
-        line-height: 1.6;
-        padding-top: 120px; /* space for fixed header */
-      }
+      body { font-family: 'Georgia', serif; background: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%); color: #e0e0e0; line-height: 1.6; }
 
       /* Header */
-      .header {
-        background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
-        color: white;
-        text-align: center;
-        padding: 60px 20px 40px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-        border-bottom: 2px solid #3a3a3a;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-      }
-
-      .header h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        font-weight: 300;
-        letter-spacing: 2px;
-      }
-
+      .header { background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%); color: white; text-align: center; padding: 60px 20px 40px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); border-bottom: 2px solid #3a3a3a; position: relative; }
+      .header h1 { font-size: 2.5em; margin-bottom: 10px; font-weight: 300; letter-spacing: 2px; }
       .header .subtitle { font-size: 1.2em; opacity: 0.95; font-style: italic; }
       .header .dates { margin-top: 15px; font-size: 1em; opacity: 0.9; }
 
       /* Navigation */
-      .nav {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        display: flex;
-        gap: 20px;
-      }
-
-      .nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1em;
-        font-weight: bold;
-        transition: color 0.3s ease;
-      }
-
+      .nav { position: absolute; top: 15px; right: 20px; display: flex; gap: 20px; }
+      .nav a { color: #fff; text-decoration: none; font-size: 1em; font-weight: bold; transition: color 0.3s ease; }
       .nav a:hover { color: #ffcc00; }
 
       @media (max-width: 768px) {
-        body { padding-top: 180px; } /* slightly more space for taller header */
-        .nav {
-          position: static;
-          justify-content: center;
-          margin-top: 20px;
-          flex-wrap: wrap;
-        }
+        .nav { position: static; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
         .nav a { margin: 5px 10px; font-size: 1.05em; }
       }
 
-      /* Main content and existing styling (unchanged) */
+      /* Main Content */
       .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
       .hero-section { background: #2c2c2c; border-radius: 12px; padding: 40px; margin: 30px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); text-align: center; border: 1px solid #3a3a3a; }
       .hero-image { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid #ffffff; margin: 0 auto 30px; display: block; box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1); }
       .tribute-text { font-size: 1.1em; color: #d0d0d0; max-width: 800px; margin: 0 auto; line-height: 1.8; }
       .section-title { text-align: center; font-size: 2em; color: #ffffff; margin: 50px 0 30px; position: relative; padding-bottom: 15px; }
       .section-title:after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: linear-gradient(to right, #ffffff, #888888); border-radius: 2px; }
+      .photo-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+      .photo-item { background: #2c2c2c; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid #3a3a3a; }
+      .photo-item:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); }
+      .photo-item img { width: 100%; height: 250px; object-fit: cover; display: block; }
+      .photo-caption { padding: 15px; font-size: 0.95em; color: #b0b0b0; text-align: center; font-style: italic; }
 
-      .footer {
-        text-align: center;
-        padding: 40px 20px;
-        color: #888888;
-        font-style: italic;
-        margin-top: 60px;
-        border-top: 1px solid #3a3a3a;
-      }
+      .memories-section { margin: 30px 0; }
+      .memory-card { background: #2c2c2c; border-radius: 8px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); border: 1px solid #3a3a3a; border-left: 4px solid #ffffff; }
+      .memory-card .author { font-weight: bold; color: #ffffff; margin-bottom: 10px; font-size: 1.1em; }
+      .memory-card .text { color: #d0d0d0; line-height: 1.8; font-size: 1.05em; }
+      .memory-card .date { margin-top: 15px; font-size: 0.9em; color: #888888; text-align: right; }
+
+      .add-memory-btn { display: block; margin: 40px auto; padding: 15px 40px; background: #ffffff; color: #000000; border: 2px solid #ffffff; border-radius: 50px; font-size: 1.1em; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); font-weight: bold; }
+      .add-memory-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3); background: #f0f0f0; }
+
+      .footer { text-align: center; padding: 40px 20px; color: #888888; font-style: italic; margin-top: 60px; border-top: 1px solid #3a3a3a; }
+
+      /* Modal Styles */
+      .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); animation: fadeIn 0.3s ease; }
+      .modal.active { display: flex; align-items: center; justify-content: center; }
+      .modal-content { background: #2c2c2c; border-radius: 12px; padding: 40px; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8); border: 1px solid #3a3a3a; animation: slideUp 0.3s ease; }
+      .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #3a3a3a; }
+      .modal-header h2 { color: #ffffff; font-size: 1.8em; margin: 0; }
+      .close-btn { background: none; border: none; color: #888888; font-size: 2em; cursor: pointer; line-height: 1; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease; }
+      .close-btn:hover { color: #ffffff; }
+
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
   </head>
-
   <body>
     <div class="header">
       <h1>Kocsi Imrére emlékezünk</h1>
